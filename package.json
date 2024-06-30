@@ -5,7 +5,7 @@
   "scripts": {
     "test": "src/tests/analyse.ts",
     "dev": "tsnd .",
-    "start": "tsc && nodemon dist/server.js"
+    "start": "tsc && nodemon src/server.ts"
   },
   "keywords": [],
   "author": "",

@@ -28,13 +28,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
+const UserRoutes_1 = require("./routes/UserRoutes");
 class App {
-    //   public rolesPermissionsRoutes: RolePermissionRoutes =
-    //     new RolePermissionRoutes();
     constructor() {
+        //   public rolesPermissionsRoutes: RolePermissionRoutes =
+        //     new RolePermissionRoutes();
+        this.userRoutes = new UserRoutes_1.UserRoutes();
         this.app = (0, express_1.default)();
         this.config();
-        // this.rolesPermissionsRoutes.routes(this.app);
+        this.userRoutes.routes(this.app);
     }
     config() {
         this.app.use(express_1.default.json());

@@ -32,5 +32,5 @@ const app_1 = __importDefault(require("./app"));
 // Setting up the environment
 const envPATH = path.resolve(__dirname, "../.env");
 dotenv.config({ path: envPATH });
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = Number(process.env.PORT) || 3002;
 app_1.default.listen(PORT, () => console.info(`API app listening on port ${PORT}!`));

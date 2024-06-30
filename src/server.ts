@@ -6,6 +6,6 @@ import app from "./app";
 const envPATH = path.resolve(__dirname, "../.env");
 dotenv.config({ path: envPATH });
 
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = Number(process.env.PORT) || 3002;
 
 app.listen(PORT, () => console.info(`API app listening on port ${PORT}!`));
