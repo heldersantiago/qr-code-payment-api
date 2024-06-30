@@ -1,15 +1,35 @@
 import { ProductRepository } from "../Repositories/ProductRepository";
+import { UserRepository } from "../Repositories/UserRepository";
 import { Product } from "../models/product";
+import { User } from "../models/user";
+import { AccountUtils } from "../utils/account";
+import { ProductUtils } from "../utils/product";
 
-export class ProductService {
+class ProductService {
   private productRepository: ProductRepository;
+  private userRepository: UserRepository;
 
   constructor() {
     this.productRepository = new ProductRepository();
+    this.userRepository = new UserRepository();
   }
 
   async createProduct(product: Product): Promise<Product> {
-    // Perform any business logic here before creating the product
+    if (!product.price) {
+      throw new Error("Product price is required");
+    }
+    if (!product.sellerId) {
+      throw new Error("Product seller is required");
+    }
+    if (!product.name) {
+      throw new Error("Product name is required");
+    }
+
+    const seller = this.userRepository.findById(product.sellerId);
+    if (!seller) {
+      throw new Error("Seller not found");
+    }
+    product.qrcodeUrl = await ProductUtils.generateProductQRCode(product);
     return await this.productRepository.create(product);
   }
 
@@ -29,3 +49,5 @@ export class ProductService {
     await this.productRepository.delete(id);
   }
 }
+
+export default new ProductService();

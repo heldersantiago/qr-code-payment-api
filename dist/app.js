@@ -29,19 +29,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const UserRoutes_1 = require("./routes/UserRoutes");
+const AccountRoutes_1 = require("./routes/AccountRoutes");
+const ProductRoutes_1 = require("./routes/ProductRoutes");
+const path_1 = __importDefault(require("path"));
 class App {
     constructor() {
-        //   public rolesPermissionsRoutes: RolePermissionRoutes =
-        //     new RolePermissionRoutes();
         this.userRoutes = new UserRoutes_1.UserRoutes();
+        this.accountRoutes = new AccountRoutes_1.AccountsRoutes();
+        this.productRoutes = new ProductRoutes_1.ProductRoutes();
         this.app = (0, express_1.default)();
         this.config();
         this.userRoutes.routes(this.app);
+        this.accountRoutes.routes(this.app);
+        this.productRoutes.routes(this.app);
     }
     config() {
         this.app.use(express_1.default.json());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use("/qrcodes", express_1.default.static(path_1.default.join(__dirname, "../qrcodes")));
     }
 }
 exports.default = new App().app;

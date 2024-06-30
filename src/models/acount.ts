@@ -3,9 +3,9 @@ import { database } from "../config/database";
 
 export class Account extends Model {
   id?: number;
-  userId!: number;
+  userId?: number;
   identifier!: number;
-  amount!: number;
+  balance!: number;
 }
 Account.init(
   {
@@ -16,13 +16,12 @@ Account.init(
     },
     userId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "users",
-        key: "id",
-      },
     },
     identifier: DataTypes.INTEGER,
-    amount: DataTypes.DECIMAL(10, 2),
+    balance: {
+      type: DataTypes.DECIMAL(10, 2),
+      defaultValue: 0,
+    },
   },
   {
     sequelize: database,

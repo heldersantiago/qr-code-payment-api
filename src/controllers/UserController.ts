@@ -37,10 +37,10 @@ export class UserController {
       if (!user) {
         return res.status(404).json({ error: "User not found" });
       }
-      await UserService.updateUser({ ...user, ...updatedUser });
-      res.status(200).json(updatedUser);
+      // await UserService.updateUser(updatedUser);
+      res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ error: error });
+      res.status(200).json({ error: error });
     }
   }
   public async deleteUser(req: Request, res: Response) {

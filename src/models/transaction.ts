@@ -20,24 +20,12 @@ Transaction.init(
     },
     customerId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "customers",
-        key: "id",
-      },
     },
     sellerId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "sellers",
-        key: "id",
-      },
     },
     productId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "products",
-        key: "id",
-      },
     },
     quantity: DataTypes.INTEGER,
     price: DataTypes.DECIMAL(10, 2),

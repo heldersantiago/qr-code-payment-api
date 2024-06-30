@@ -1,12 +1,16 @@
 // src/services/UserService.ts
+import { AccountRepository } from "../Repositories/AccountRepository";
 import { UserRepository } from "../Repositories/UserRepository";
 import { User } from "../models/user";
+import { AccountUtils } from "../utils/account";
+import AccountService from "./AccountService";
 
 class UserService {
   private userRepository: UserRepository;
-
+  private accountRepository: AccountRepository;
   constructor() {
     this.userRepository = new UserRepository();
+    this.accountRepository = new AccountRepository();
   }
 
   async getAllUsers(): Promise<any> {
@@ -16,7 +20,10 @@ class UserService {
     if (!user) {
       throw new Error("User object is required");
     }
-    return await this.userRepository.create(user);
+    return await this.userRepository.create(user).then((userCreated) => {
+      AccountService.createAccount(userCreated.id!);
+      return userCreated;
+    });
   }
 
   async getUserById(id: number): Promise<User | null> {

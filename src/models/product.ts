@@ -26,10 +26,6 @@ Product.init(
     imageUrl: DataTypes.STRING,
     sellerId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "users",
-        key: "id",
-      },
     },
     qrcodeUrl: DataTypes.STRING,
   },
