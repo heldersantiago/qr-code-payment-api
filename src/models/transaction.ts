@@ -7,7 +7,6 @@ export class Transaction extends Model {
   sellerId!: number;
   productId!: number;
   quantity!: number;
-  price!: number;
   status!: string;
 }
 
@@ -20,15 +19,17 @@ Transaction.init(
     },
     customerId: {
       type: DataTypes.INTEGER,
+      allowNull:false
     },
     sellerId: {
       type: DataTypes.INTEGER,
+      allowNull:false
     },
     productId: {
       type: DataTypes.INTEGER,
+      allowNull:false
     },
     quantity: DataTypes.INTEGER,
-    price: DataTypes.DECIMAL(10, 2),
     status: DataTypes.STRING,
   },
   {

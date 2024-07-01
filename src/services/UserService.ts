@@ -2,7 +2,6 @@
 import { AccountRepository } from "../Repositories/AccountRepository";
 import { UserRepository } from "../Repositories/UserRepository";
 import { User } from "../models/user";
-import { AccountUtils } from "../utils/account";
 import AccountService from "./AccountService";
 
 class UserService {

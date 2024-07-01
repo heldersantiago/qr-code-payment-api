@@ -31,23 +31,24 @@ const bodyParser = __importStar(require("body-parser"));
 const UserRoutes_1 = require("./routes/UserRoutes");
 const AccountRoutes_1 = require("./routes/AccountRoutes");
 const ProductRoutes_1 = require("./routes/ProductRoutes");
-const path_1 = __importDefault(require("path"));
+const AuthRoutes_1 = require("./routes/AuthRoutes");
 class App {
     constructor() {
         this.userRoutes = new UserRoutes_1.UserRoutes();
         this.accountRoutes = new AccountRoutes_1.AccountsRoutes();
         this.productRoutes = new ProductRoutes_1.ProductRoutes();
+        this.authRoutes = new AuthRoutes_1.AuthRoutes();
         this.app = (0, express_1.default)();
         this.config();
         this.userRoutes.routes(this.app);
         this.accountRoutes.routes(this.app);
         this.productRoutes.routes(this.app);
+        this.authRoutes.routes(this.app);
     }
     config() {
         this.app.use(express_1.default.json());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use("/qrcodes", express_1.default.static(path_1.default.join(__dirname, "../qrcodes")));
     }
 }
 exports.default = new App().app;

@@ -27,7 +27,7 @@ export class AccountController {
   }
 
   public async createAccount(req: Request, res: Response): Promise<void> {
-    const { userId } = req.body;
+    const { userId } = req.body.user.id;
     try {
       const account = await AccountService.createAccount(userId);
       res.status(201).json(account);

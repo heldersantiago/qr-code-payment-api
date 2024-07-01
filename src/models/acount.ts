@@ -16,8 +16,9 @@ Account.init(
     },
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    identifier: DataTypes.INTEGER,
+    identifier: { type: DataTypes.BIGINT, allowNull: false },
     balance: {
       type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0,

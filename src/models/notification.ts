@@ -15,7 +15,7 @@ Notification.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: DataTypes.INTEGER,
+    userId: { type: DataTypes.INTEGER, allowNull: false },
     message: DataTypes.STRING,
     isRead: DataTypes.BOOLEAN,
   },

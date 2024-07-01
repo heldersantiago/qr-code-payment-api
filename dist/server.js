@@ -29,8 +29,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 const path = require("path");
 const app_1 = __importDefault(require("./app"));
+const express = require("express");
 // Setting up the environment
 const envPATH = path.resolve(__dirname, "../.env");
 dotenv.config({ path: envPATH });
 const PORT = Number(process.env.PORT) || 3002;
+app_1.default.use("/public", express.static(path.join(__dirname, "../public")));
 app_1.default.listen(PORT, () => console.info(`API app listening on port ${PORT}!`));

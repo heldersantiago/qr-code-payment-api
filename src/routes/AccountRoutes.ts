@@ -1,4 +1,5 @@
 import { AccountController } from "../controllers/AccountController";
+import auth from "../middlewares/auth";
 
 export class AccountsRoutes {
   private readonly apiUrl: string = "/api/v1/accounts";
@@ -6,7 +7,7 @@ export class AccountsRoutes {
 
   public routes(app: any): void {
     app.route(this.apiUrl).get(this.accountController.getAccounts);
-    app.route(this.apiUrl).post(this.accountController.createAccount);
+    app.route(this.apiUrl).post(auth, this.accountController.createAccount);
     app
       .route(this.apiUrl + "/transfer")
       .post(this.accountController.transferFunds);

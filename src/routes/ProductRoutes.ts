@@ -1,4 +1,5 @@
 import { ProductController } from "../controllers/ProductController";
+import auth from "../middlewares/auth";
 
 export class ProductRoutes {
   private readonly apiUrl: string = "/api/v1/products";
@@ -7,7 +8,9 @@ export class ProductRoutes {
   public routes(app: any): void {
     app.route(this.apiUrl).get(this.productController.getProducts);
     app.route(this.apiUrl).post(this.productController.createProduct);
-    app.route(this.apiUrl + "/:id").get(this.productController.getProductById);
+    app
+      .route(this.apiUrl + "/:id")
+      .get(auth, this.productController.getProductById);
     // app
     //   .route(this.apiUrl + "/transfer")
     //   .post(this.accountController.transferFunds);

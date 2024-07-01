@@ -19,15 +19,16 @@ Product.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.STRING,
+    name: {type:DataTypes.STRING, allowNull:false},
     description: DataTypes.TEXT,
-    price: DataTypes.DECIMAL(10, 2),
+    price: {type:DataTypes.DECIMAL(10, 2),allowNull:false},
     quantity: DataTypes.INTEGER,
     imageUrl: DataTypes.STRING,
     sellerId: {
       type: DataTypes.INTEGER,
+      allowNull:false
     },
-    qrcodeUrl: DataTypes.STRING,
+    qrcodeUrl: {type:DataTypes.STRING, allowNull:false},
   },
   {
     sequelize: database,

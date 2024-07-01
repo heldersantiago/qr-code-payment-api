@@ -28,8 +28,8 @@ User.init(
       unique: true,
       validate: { isEmail: true },
     },
-    password: DataTypes.STRING,
-    phone: DataTypes.STRING,
+    password: {type:DataTypes.STRING, allowNull:false},
+    phone: {type:DataTypes.STRING, allowNull:false},
     role: {
       type: DataTypes.ENUM(...Object.values(UserRole)),
       defaultValue: UserRole.CUSTOMER,
