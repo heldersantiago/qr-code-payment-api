@@ -1,8 +1,6 @@
 import { ProductRepository } from "../Repositories/ProductRepository";
 import { UserRepository } from "../Repositories/UserRepository";
 import { Product } from "../models/product";
-import { User } from "../models/user";
-import { AccountUtils } from "../utils/account";
 import { ProductUtils } from "../utils/product";
 
 class ProductService {

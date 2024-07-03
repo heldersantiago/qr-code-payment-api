@@ -1,6 +1,5 @@
 import { AccountRepository } from "../Repositories/AccountRepository";
 import { Account } from "../models/acount";
-import { Transaction } from "../models/transaction";
 import { AccountUtils } from "../utils/account";
 
 class AccountService {
@@ -31,64 +30,53 @@ class AccountService {
     toAccountId: number,
     amount: number
   ): Promise<any> {
-    const fromAccount = await this.accountRepository.getAccountById(
+    const fromAccount = await this.accountRepository.getAccountByUserId(
       fromAccountId
     );
-    const toAccount = await this.accountRepository.getAccountById(toAccountId);
+    const toAccount = await this.accountRepository.getAccountByUserId(
+      toAccountId
+    );
 
     if (!fromAccount) {
       throw new Error("Account not found");
     }
 
-    if (!fromAccount) {
+    if (!toAccount) {
       throw new Error("Account not found");
     }
 
-    if (fromAccount.balance < amount) {
+    if (parseFloat(fromAccount.balance as any) < amount) {
+      throw new Error("Insufficient funds");
+    }
+    if (parseFloat(fromAccount.balance as any) - amount < 0) {
       throw new Error("Insufficient funds");
     }
 
-    await Account.update(
+    await  fromAccount.update(
       {
         balance: parseFloat(fromAccount.balance as any) - amount,
-      },
-      {
-        where: {
-          id: fromAccountId,
-        },
       }
     );
-    await Account.update(
+    await toAccount.update(
       {
         balance: parseFloat(toAccount!.balance as any) + amount,
       },
-      {
-        where: {
-          id: toAccountId,
-        },
-      }
     );
   }
   public async getAccountTransactions(accountId: number): Promise<any> {
     return await this.accountRepository.getAccountTransactions(accountId);
   }
-  public async getAccountsByUserId(userId: number): Promise<Account[]> {
+  public async getAccountsByUserId(userId: number): Promise<Account | null> {
     return await this.accountRepository.getAccountByUserId(userId);
   }
 
   public async sendFund(amount: number, toAccountId: number): Promise<any> {
-    const account = await Account.findByPk(toAccountId);
-    console.log(account);
+    const account = await this.accountRepository.getAccountByIdentifier(toAccountId);
     if (!account) {
       throw new Error("Account not found");
     }
-    await Account.update(
+    await account.update(
       { balance: parseFloat(account.balance as any) + amount },
-      {
-        where: {
-          id: toAccountId,
-        },
-      }
     );
   }
   public async withDrawFund(amount: number, toAccountId: number): Promise<any> {

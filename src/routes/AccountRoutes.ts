@@ -22,5 +22,8 @@ export class AccountsRoutes {
       .get(this.accountController.getAccountById)
       .put(this.accountController.updateAccount)
       .delete(this.accountController.deleteAccount);
+    app
+      .route(this.apiUrl + "/user/:userId")
+      .get(this.accountController.getAccountsByUserId);
   }
 }

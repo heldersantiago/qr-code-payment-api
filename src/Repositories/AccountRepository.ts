@@ -36,7 +36,11 @@ export class AccountRepository implements IAccountRepository {
     // return await Transaction.findAll({ where: { accountId } });
   }
 
-  public async getAccountByUserId(userId: number): Promise<Account[]> {
-    return await Account.findAll({ where: { userId } });
+  public async getAccountByUserId(userId: number): Promise<Account | null> {
+    return await Account.findOne({ where: { userId } });
+  }
+
+  public async getAccountByIdentifier(identifier: number): Promise<Account | null> {
+    return await Account.findOne({ where: { identifier } });
   }
 }

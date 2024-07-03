@@ -90,11 +90,11 @@ export class AccountController {
     }
   }
 
-  public async getAccountsByUserId(req: Request, res: Response): Promise<void> {
+  public async getAccountsByUserId(req: Request, res: Response): Promise<any> {
     const userId = parseInt(req.params.userId);
     try {
-      const accounts = await AccountService.getAccountsByUserId(userId);
-      res.status(200).json(accounts);
+      const account = await AccountService.getAccountsByUserId(userId);
+      res.status(200).json(account);
     } catch (error) {
       res.status(500).json({ error: error });
     }

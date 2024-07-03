@@ -9,7 +9,6 @@ export class ProductController {
   }
   public async createProduct(req: Request, res: Response) {
     const newProduct = req.body;
-    newProduct.id = req.body.user.id;
     try {
       const createdProduct = await ProductService.createProduct(newProduct);
       res.status(201).json(createdProduct);

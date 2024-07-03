@@ -12,9 +12,6 @@ export class ProductRoutes {
       .route(this.apiUrl + "/:id")
       .get(auth, this.productController.getProductById);
     // app
-    //   .route(this.apiUrl + "/transfer")
-    //   .post(this.accountController.transferFunds);
-    // app
     //   .route(this.apiUrl + "/send-funds")
     //   .post(this.accountController.sendFund);
     // app
